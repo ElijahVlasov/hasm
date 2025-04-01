@@ -63,6 +63,7 @@ library
         Opcode,
         Opcode.Funct3,
         Opcode.Funct7,
+        Immediate,
         InstructionBuilder,
         FenceType,
         Register
@@ -84,6 +85,8 @@ library
     -- Base language which the package is written in.
     default-language: GHC2021
 
+    default-extensions:       
+        DerivingStrategies
 executable hasm
     -- Import common warning flags.
     import:           warnings
