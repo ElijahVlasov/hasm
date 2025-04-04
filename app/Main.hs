@@ -1,8 +1,8 @@
 module Main where
 
-import qualified InstructionBuilder (someFunc)
+import InstructionBuilder qualified (someFunc)
 
 main :: IO ()
 main = do
-  putStrLn "Hello, Haskell!"
-  InstructionBuilder.someFunc
+    putStrLn "Hello, Haskell!"
+    InstructionBuilder.someFunc
