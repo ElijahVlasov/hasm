@@ -20,48 +20,51 @@
 snapshot:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/25.yaml
 
-# User packages to be built.
-# Various formats can be used as shown in the example below.
-#
-# packages:
-# - some-directory
-# - https://example.com/foo/bar/baz-0.0.2.tar.gz
-#   subdirs:
-#   - auto-update
-#   - wai
+  # User packages to be built.
+  # Various formats can be used as shown in the example below.
+  #
+  # packages:
+  # - some-directory
+  # - https://example.com/foo/bar/baz-0.0.2.tar.gz
+  #   subdirs:
+  #   - auto-update
+  #   - wai
 packages:
-- .
-# Dependency packages to be pulled from upstream that are not in the snapshot.
-# These entries can reference officially published versions as well as
-# forks / in-progress versions pinned to a git hash. For example:
-#
-# extra-deps:
-# - acme-missiles-0.3
-# - git: https://github.com/commercialhaskell/stack.git
-#   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
-#
-# extra-deps: []
+  - .
+  # Dependency packages to be pulled from upstream that are not in the snapshot.
+  # These entries can reference officially published versions as well as
+  # forks / in-progress versions pinned to a git hash. For example:
+  #
+  # extra-deps:
+  # - acme-missiles-0.3
+  # - git: https://github.com/commercialhaskell/stack.git
+  #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
+  #
+extra-deps: 
+  - tasty-1.5.3@sha256:9d56ea9dbc274fc853fc531373b2c91bfe360e21460c2c6a5838897d86e3f6d0,2923
+  - tasty-hunit-0.10.2@sha256:22bc1122e8256664d7cb1e44c6bcace95676c523179947bf2403db71af43dc6d,1473
 
-# Override default flag values for project packages and extra-deps
-# flags: {}
 
-# Extra package databases containing global packages
-# extra-package-dbs: []
+  # Override default flag values for project packages and extra-deps
+  # flags: {}
 
-# Control whether we use the GHC we find on the path
-# system-ghc: true
-#
-# Require a specific version of Stack, using version ranges
-# require-stack-version: -any # Default
-# require-stack-version: ">=3.3"
-#
-# Override the architecture used by Stack, especially useful on Windows
-# arch: i386
-# arch: x86_64
-#
-# Extra directories used by Stack for building
-# extra-include-dirs: [/path/to/dir]
-# extra-lib-dirs: [/path/to/dir]
-#
-# Allow a newer minor version of GHC than the snapshot specifies
-# compiler-check: newer-minor
+  # Extra package databases containing global packages
+  # extra-package-dbs: []
+
+  # Control whether we use the GHC we find on the path
+  # system-ghc: true
+  #
+  # Require a specific version of Stack, using version ranges
+  # require-stack-version: -any # Default
+  # require-stack-version: ">=3.3"
+  #
+  # Override the architecture used by Stack, especially useful on Windows
+  # arch: i386
+  # arch: x86_64
+  #
+  # Extra directories used by Stack for building
+  # extra-include-dirs: [/path/to/dir]
+  # extra-lib-dirs: [/path/to/dir]
+  #
+  # Allow a newer minor version of GHC than the snapshot specifies
+  # compiler-check: newer-minor

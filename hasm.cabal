@@ -66,7 +66,8 @@ library
         Immediate,
         InstructionBuilder,
         FenceType,
-        Register
+        Register,
+        Utils
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -136,4 +137,7 @@ test-suite hasm-test
     -- Test dependencies.
     build-depends:
         base ^>=4.17.2.1,
-        hasm
+        hasm,
+        HUnit ^>= 1.6.2.0,
+        tasty ^>= 1.5.1,
+        tasty-hunit ^>= 0.10.2 
