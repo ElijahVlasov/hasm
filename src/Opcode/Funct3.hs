@@ -1,9 +1,7 @@
-{-# LANGUAGE DerivingStrategies #-}
-
 module Opcode.Funct3
     ( Funct3
-    , ofWord32Funct3
-    , toWord32Funct3
+    , fromWord32
+    , toWord32
     , addSub
     , Opcode.Funct3.xor
     , Opcode.Funct3.or
@@ -41,11 +39,11 @@ newtype Funct3 = Funct3 Word32
 funct3Mask :: Word32
 funct3Mask = 0b111
 
-ofWord32Funct3 :: Word32 -> Funct3
-ofWord32Funct3 x = Funct3 ((x .&. funct3Mask) `shiftL` 12)
+fromWord32 :: Word32 -> Funct3
+fromWord32 x = Funct3 ((x .&. funct3Mask) `shiftL` 12)
 
-toWord32Funct3 :: Funct3 -> Word32
-toWord32Funct3 (Funct3 x) = x
+toWord32 :: Funct3 -> Word32
+toWord32 (Funct3 x) = x
 
 -- Funct3 constants
 addSub
@@ -74,28 +72,28 @@ addSub
     , priv
     , fence
         :: Funct3
-addSub = ofWord32Funct3 0b000
-xor = ofWord32Funct3 0b100
-or = ofWord32Funct3 0b110
-and = ofWord32Funct3 0b111
-sll = ofWord32Funct3 0b001
-srl = ofWord32Funct3 0b101
-slt = ofWord32Funct3 0b010
-sltu = ofWord32Funct3 0b011
-lb = ofWord32Funct3 0b000
-lh = ofWord32Funct3 0b001
-lw = ofWord32Funct3 0b010
-lbu = ofWord32Funct3 0b100
-lhu = ofWord32Funct3 0b101
-sb = ofWord32Funct3 0b000
-sh = ofWord32Funct3 0b001
-sw = ofWord32Funct3 0b010
-beq = ofWord32Funct3 0b000
-bne = ofWord32Funct3 0b001
-blt = ofWord32Funct3 0b100
-bge = ofWord32Funct3 0b101
-bltu = ofWord32Funct3 0b110
-bgeu = ofWord32Funct3 0b111
-jalr = ofWord32Funct3 0b000
-priv = ofWord32Funct3 0b000
-fence = ofWord32Funct3 0b000
+addSub = fromWord32 0b000
+xor = fromWord32 0b100
+or = fromWord32 0b110
+and = fromWord32 0b111
+sll = fromWord32 0b001
+srl = fromWord32 0b101
+slt = fromWord32 0b010
+sltu = fromWord32 0b011
+lb = fromWord32 0b000
+lh = fromWord32 0b001
+lw = fromWord32 0b010
+lbu = fromWord32 0b100
+lhu = fromWord32 0b101
+sb = fromWord32 0b000
+sh = fromWord32 0b001
+sw = fromWord32 0b010
+beq = fromWord32 0b000
+bne = fromWord32 0b001
+blt = fromWord32 0b100
+bge = fromWord32 0b101
+bltu = fromWord32 0b110
+bgeu = fromWord32 0b111
+jalr = fromWord32 0b000
+priv = fromWord32 0b000
+fence = fromWord32 0b000

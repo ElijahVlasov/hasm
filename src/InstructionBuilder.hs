@@ -1,15 +1,19 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module InstructionBuilder (someFunc) where
+module InstructionBuilder () where
 
 import Data.Bits (shiftL, (.&.), (.|.))
-import Data.Functor.Identity (Identity (..))
 import Data.Kind (Type)
 import Data.Type.Bool (type (&&), type (||))
-import Data.Type.Equality ((:~:) (Refl))
 import Data.Word (Word32)
-import GHC.TypeLits (Div, Mod, Nat)
+
+import Opcode.Funct3 (Funct3)
+import qualified Opcode.Funct3 as Funct3
+import Opcode (Opcode)
+import qualified Opcode 
+import Register (Register)
+import qualified Register
 
 newtype PartialInstruction a = PartialInstruction Word32
 
@@ -19,12 +23,6 @@ type BuilderStateSig = (Bool, Bool, Bool, Bool, Bool, Bool)
 type BuilderState :: BuilderStateSig -> Type
 type family BuilderState n where
     BuilderState n = PartialInstruction n
-
-x :: BuilderState '(True, False, False, False, False, False)
-x = PartialInstruction 0
-
-y :: BuilderState '(False, True, False, False, False, False)
-y = PartialInstruction 1
 
 (|:)
     :: ( (a1 && a2) ~ 'False
@@ -41,22 +39,22 @@ y = PartialInstruction 1
 (|:) (PartialInstruction x) (PartialInstruction y) = PartialInstruction (x .|. y)
 
 opcode
-    :: Word32 -> BuilderState '(False, False, False, False, False, True)
-opcode x = PartialInstruction (x .&. 0b00000000000000000000000001111111)
+    :: Opcode -> BuilderState '(False, False, False, False, False, True)
+opcode = PartialInstruction . Opcode.toWord32 
 
 rd
-    :: Word32 -> BuilderState '(False, False, False, False, True, False)
-rd x = PartialInstruction (x .&. (0b11111 `shiftL` 7))
+    :: Register -> BuilderState '(False, False, False, False, True, False)
+rd reg = PartialInstruction $ Register.toWord32 reg `shiftL` 7
 
 funct3
-    :: Word32 -> BuilderState '(False, False, False, True, False, False)
-funct3 x = PartialInstruction (x .&. (0b111 `shiftL` 12))
+    :: Funct3 -> BuilderState '(False, False, False, True, False, False)
+funct3 = PartialInstruction . Funct3.toWord32
 
 rs1
-    :: Word32 -> BuilderState '(False, False, True, False, False, False)
-rs1 x = PartialInstruction (x .&. (0b11111 `shiftL` 15))
+    :: Register -> BuilderState '(False, False, True, False, False, False)
+rs1 reg = PartialInstruction $ Register.toWord32 reg `shiftL` 15
 
-z = x |: y
+rs2
+    :: Register -> BuilderState '(False, False, True, False, False, False)
+rs2 reg = PartialInstruction $ Register.toWord32 reg `shiftL` 20
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"

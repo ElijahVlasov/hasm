@@ -3,13 +3,11 @@
 
 module Register
     ( Register
-    , ofInt
-    , ofInt32
+    , fromInt
+    , fromInt32
     , toInt
     , toInt32
-    , toString
-    , ofString
-    , equalRegister
+    , fromString
     , ppRegister
     -- Register constants
     , x0
@@ -78,26 +76,33 @@ module Register
     , t4
     , t5
     , t6
+    , fromWord32
+    , toWord32
     ) where
 
 import Data.Int (Int32)
 import Data.Text (Text, pack)
 import Text.Printf (printf)
+import Utils (word32ToInt32, int32ToWord32)
+import Data.Word (Word32)
 
 -- Register type
 newtype Register = Register Int32
     deriving newtype (Eq)
 
 instance Show Register where
-    show (Register n) = printf "x%d" (toInt (Register n))
+    show (Register n) = printf "x%d" n
 
 -- Conversion functions
-ofInt :: Int -> Maybe Register
-ofInt n =
+fromInt :: Int -> Maybe Register
+fromInt n =
     if n < 0 || n > 31 then Nothing else Just (Register (fromIntegral n))
 
-ofInt32 :: Int32 -> Maybe Register
-ofInt32 n = if n < 0 || n > 31 then Nothing else Just (Register n)
+fromInt32 :: Int32 -> Maybe Register
+fromInt32 n = if n < 0 || n > 31 then Nothing else Just (Register n)
+
+fromWord32 :: Word32 -> Maybe Register 
+fromWord32 = fromInt32 . word32ToInt32
 
 toInt :: Register -> Int
 toInt (Register n) = fromIntegral n
@@ -105,15 +110,12 @@ toInt (Register n) = fromIntegral n
 toInt32 :: Register -> Int32
 toInt32 (Register n) = n
 
-toString :: Register -> Text
-toString (Register n) = pack $ printf "x%d" (toInt (Register n))
+toWord32 
+  :: Register -> Word32 
+toWord32 = int32ToWord32 . toInt32
 
 ppRegister :: Register -> Text
-ppRegister = toString
-
-equalRegister :: Register -> Register -> Bool
-equalRegister = (==)
-
+ppRegister (Register n) = pack $ printf "x%d" (toInt (Register n))
 -- Register constants
 x0
     , x1
@@ -250,8 +252,8 @@ t5 = x30
 t6 = x31
 
 -- String to register conversion
-ofString :: Text -> Maybe Register
-ofString s = case s of
+fromString :: Text -> Maybe Register
+fromString s = case s of
     "x0" -> Just x0
     "x1" -> Just x1
     "x2" -> Just x2
