@@ -40,7 +40,7 @@ funct3Mask :: Word32
 funct3Mask = 0b111
 
 fromWord32 :: Word32 -> Funct3
-fromWord32 x = Funct3 ((x .&. funct3Mask) `shiftL` 12)
+fromWord32 x = Funct3 (x .&. funct3Mask)
 
 toWord32 :: Funct3 -> Word32
 toWord32 (Funct3 x) = x
@@ -97,3 +97,4 @@ bgeu = fromWord32 0b111
 jalr = fromWord32 0b000
 priv = fromWord32 0b000
 fence = fromWord32 0b000
+

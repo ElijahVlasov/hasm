@@ -2,8 +2,8 @@
 
 module Opcode.Funct7
     ( Funct7
-    , ofWord32Funct7
-    , toWord32Funct7
+    , fromWord32
+    , toWord32
     , zero
     , subSra
     ) where
@@ -18,13 +18,14 @@ newtype Funct7 = Funct7 Word32
 funct7Mask :: Word32
 funct7Mask = 0b1111111
 
-ofWord32Funct7 :: Word32 -> Funct7
-ofWord32Funct7 x = Funct7 ((x .&. funct7Mask) `shiftL` 25)
+fromWord32 :: Word32 -> Funct7
+fromWord32 x = Funct7 (x .&. funct7Mask)
 
-toWord32Funct7 :: Funct7 -> Word32
-toWord32Funct7 (Funct7 x) = x
+toWord32 :: Funct7 -> Word32
+toWord32 (Funct7 x) = x
 
 -- Funct7 constants
 zero, subSra :: Funct7
-zero = ofWord32Funct7 0b0000000
-subSra = ofWord32Funct7 0b0100000
+zero = fromWord32 0b0000000
+subSra = fromWord32 0b0100000
+

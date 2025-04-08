@@ -65,6 +65,7 @@ library
         Opcode.Funct7,
         Immediate,
         InstructionBuilder,
+        InstructionBuilder.InstructionChunk,
         FenceType,
         Register,
         Utils
