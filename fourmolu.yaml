@@ -14,7 +14,7 @@ fixities:
 haddock-style: single-line
 in-style: left-align
 indent-wheres: false
-indentation: 4
+indentation: 2 
 let-style: auto
 newlines-between-decls: 1
 record-brace-space: false
