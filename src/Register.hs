@@ -2,106 +2,106 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Register
-    ( Register
-    , fromInt
-    , fromInt32
-    , toInt
-    , toInt32
-    , fromString
-    , ppRegister
-    -- Register constants
-    , x0
-    , x1
-    , x2
-    , x3
-    , x4
-    , x5
-    , x6
-    , x7
-    , x8
-    , x9
-    , x10
-    , x11
-    , x12
-    , x13
-    , x14
-    , x15
-    , x16
-    , x17
-    , x18
-    , x19
-    , x20
-    , x21
-    , x22
-    , x23
-    , x24
-    , x25
-    , x26
-    , x27
-    , x28
-    , x29
-    , x30
-    , x31
-    , x32
-    , pc
-    , zero
-    , ra
-    , sp
-    , gp
-    , tp
-    , t0
-    , t1
-    , t2
-    , s0
-    , s1
-    , a0
-    , a1
-    , a2
-    , a3
-    , a4
-    , a5
-    , a6
-    , a7
-    , s2
-    , s3
-    , s4
-    , s5
-    , s6
-    , s7
-    , s8
-    , s9
-    , s10
-    , s11
-    , t3
-    , t4
-    , t5
-    , t6
-    , fromWord32
-    , toWord32
-    ) where
+  ( Register
+  , fromInt
+  , fromInt32
+  , toInt
+  , toInt32
+  , fromString
+  , ppRegister
+  -- Register constants
+  , x0
+  , x1
+  , x2
+  , x3
+  , x4
+  , x5
+  , x6
+  , x7
+  , x8
+  , x9
+  , x10
+  , x11
+  , x12
+  , x13
+  , x14
+  , x15
+  , x16
+  , x17
+  , x18
+  , x19
+  , x20
+  , x21
+  , x22
+  , x23
+  , x24
+  , x25
+  , x26
+  , x27
+  , x28
+  , x29
+  , x30
+  , x31
+  , x32
+  , pc
+  , zero
+  , ra
+  , sp
+  , gp
+  , tp
+  , t0
+  , t1
+  , t2
+  , s0
+  , s1
+  , a0
+  , a1
+  , a2
+  , a3
+  , a4
+  , a5
+  , a6
+  , a7
+  , s2
+  , s3
+  , s4
+  , s5
+  , s6
+  , s7
+  , s8
+  , s9
+  , s10
+  , s11
+  , t3
+  , t4
+  , t5
+  , t6
+  , fromWord32
+  , toWord32
+  ) where
 
 import Data.Int (Int32)
 import Data.Text (Text, pack)
-import Text.Printf (printf)
-import Utils (word32ToInt32, int32ToWord32)
 import Data.Word (Word32)
+import Text.Printf (printf)
+import Utils (int32ToWord32, word32ToInt32)
 
 -- Register type
 newtype Register = Register Int32
-    deriving newtype (Eq)
+  deriving newtype (Eq)
 
 instance Show Register where
-    show (Register n) = printf "x%d" n
+  show (Register n) = printf "x%d" n
 
 -- Conversion functions
 fromInt :: Int -> Maybe Register
 fromInt n =
-    if n < 0 || n > 31 then Nothing else Just (Register (fromIntegral n))
+  if n < 0 || n > 31 then Nothing else Just (Register (fromIntegral n))
 
 fromInt32 :: Int32 -> Maybe Register
 fromInt32 n = if n < 0 || n > 31 then Nothing else Just (Register n)
 
-fromWord32 :: Word32 -> Maybe Register 
+fromWord32 :: Word32 -> Maybe Register
 fromWord32 = fromInt32 . word32ToInt32
 
 toInt :: Register -> Int
@@ -110,80 +110,81 @@ toInt (Register n) = fromIntegral n
 toInt32 :: Register -> Int32
 toInt32 (Register n) = n
 
-toWord32 
-  :: Register -> Word32 
+toWord32
+  :: Register -> Word32
 toWord32 = int32ToWord32 . toInt32
 
 ppRegister :: Register -> Text
 ppRegister (Register n) = pack $ printf "x%d" (toInt (Register n))
+
 -- Register constants
 x0
-    , x1
-    , x2
-    , x3
-    , x4
-    , x5
-    , x6
-    , x7
-    , x8
-    , x9
-    , x10
-    , x11
-    , x12
-    , x13
-    , x14
-    , x15
-    , x16
-    , x17
-    , x18
-    , x19
-    , x20
-    , x21
-    , x22
-    , x23
-    , x24
-    , x25
-    , x26
-    , x27
-    , x28
-    , x29
-    , x30
-    , x31
-    , x32
-    , pc
-    , zero
-    , ra
-    , sp
-    , gp
-    , tp
-    , t0
-    , t1
-    , t2
-    , s0
-    , s1
-    , a0
-    , a1
-    , a2
-    , a3
-    , a4
-    , a5
-    , a6
-    , a7
-    , s2
-    , s3
-    , s4
-    , s5
-    , s6
-    , s7
-    , s8
-    , s9
-    , s10
-    , s11
-    , t3
-    , t4
-    , t5
-    , t6
-        :: Register
+  , x1
+  , x2
+  , x3
+  , x4
+  , x5
+  , x6
+  , x7
+  , x8
+  , x9
+  , x10
+  , x11
+  , x12
+  , x13
+  , x14
+  , x15
+  , x16
+  , x17
+  , x18
+  , x19
+  , x20
+  , x21
+  , x22
+  , x23
+  , x24
+  , x25
+  , x26
+  , x27
+  , x28
+  , x29
+  , x30
+  , x31
+  , x32
+  , pc
+  , zero
+  , ra
+  , sp
+  , gp
+  , tp
+  , t0
+  , t1
+  , t2
+  , s0
+  , s1
+  , a0
+  , a1
+  , a2
+  , a3
+  , a4
+  , a5
+  , a6
+  , a7
+  , s2
+  , s3
+  , s4
+  , s5
+  , s6
+  , s7
+  , s8
+  , s9
+  , s10
+  , s11
+  , t3
+  , t4
+  , t5
+  , t6
+    :: Register
 x0 = Register 0
 x1 = Register 1
 x2 = Register 2
@@ -254,70 +255,70 @@ t6 = x31
 -- String to register conversion
 fromString :: Text -> Maybe Register
 fromString s = case s of
-    "x0" -> Just x0
-    "x1" -> Just x1
-    "x2" -> Just x2
-    "x3" -> Just x3
-    "x4" -> Just x4
-    "x5" -> Just x5
-    "x6" -> Just x6
-    "x7" -> Just x7
-    "x8" -> Just x8
-    "x9" -> Just x9
-    "x10" -> Just x10
-    "x11" -> Just x11
-    "x12" -> Just x12
-    "x13" -> Just x13
-    "x14" -> Just x14
-    "x15" -> Just x15
-    "x16" -> Just x16
-    "x17" -> Just x17
-    "x18" -> Just x18
-    "x19" -> Just x19
-    "x20" -> Just x20
-    "x21" -> Just x21
-    "x22" -> Just x22
-    "x23" -> Just x23
-    "x24" -> Just x24
-    "x25" -> Just x25
-    "x26" -> Just x26
-    "x27" -> Just x27
-    "x28" -> Just x28
-    "x29" -> Just x29
-    "x30" -> Just x30
-    "x31" -> Just x31
-    "x32" -> Just x32
-    "pc" -> Just pc
-    "zero" -> Just zero
-    "ra" -> Just ra
-    "sp" -> Just sp
-    "gp" -> Just gp
-    "tp" -> Just tp
-    "t0" -> Just t0
-    "t1" -> Just t1
-    "t2" -> Just t2
-    "s0" -> Just s0
-    "s1" -> Just s1
-    "a0" -> Just a0
-    "a1" -> Just a1
-    "a2" -> Just a2
-    "a3" -> Just a3
-    "a4" -> Just a4
-    "a5" -> Just a5
-    "a6" -> Just a6
-    "a7" -> Just a7
-    "s2" -> Just s2
-    "s3" -> Just s3
-    "s4" -> Just s4
-    "s5" -> Just s5
-    "s6" -> Just s6
-    "s7" -> Just s7
-    "s8" -> Just s8
-    "s9" -> Just s9
-    "s10" -> Just s10
-    "s11" -> Just s11
-    "t3" -> Just t3
-    "t4" -> Just t4
-    "t5" -> Just t5
-    "t6" -> Just t6
-    _ -> Nothing
+  "x0" -> Just x0
+  "x1" -> Just x1
+  "x2" -> Just x2
+  "x3" -> Just x3
+  "x4" -> Just x4
+  "x5" -> Just x5
+  "x6" -> Just x6
+  "x7" -> Just x7
+  "x8" -> Just x8
+  "x9" -> Just x9
+  "x10" -> Just x10
+  "x11" -> Just x11
+  "x12" -> Just x12
+  "x13" -> Just x13
+  "x14" -> Just x14
+  "x15" -> Just x15
+  "x16" -> Just x16
+  "x17" -> Just x17
+  "x18" -> Just x18
+  "x19" -> Just x19
+  "x20" -> Just x20
+  "x21" -> Just x21
+  "x22" -> Just x22
+  "x23" -> Just x23
+  "x24" -> Just x24
+  "x25" -> Just x25
+  "x26" -> Just x26
+  "x27" -> Just x27
+  "x28" -> Just x28
+  "x29" -> Just x29
+  "x30" -> Just x30
+  "x31" -> Just x31
+  "x32" -> Just x32
+  "pc" -> Just pc
+  "zero" -> Just zero
+  "ra" -> Just ra
+  "sp" -> Just sp
+  "gp" -> Just gp
+  "tp" -> Just tp
+  "t0" -> Just t0
+  "t1" -> Just t1
+  "t2" -> Just t2
+  "s0" -> Just s0
+  "s1" -> Just s1
+  "a0" -> Just a0
+  "a1" -> Just a1
+  "a2" -> Just a2
+  "a3" -> Just a3
+  "a4" -> Just a4
+  "a5" -> Just a5
+  "a6" -> Just a6
+  "a7" -> Just a7
+  "s2" -> Just s2
+  "s3" -> Just s3
+  "s4" -> Just s4
+  "s5" -> Just s5
+  "s6" -> Just s6
+  "s7" -> Just s7
+  "s8" -> Just s8
+  "s9" -> Just s9
+  "s10" -> Just s10
+  "s11" -> Just s11
+  "t3" -> Just t3
+  "t4" -> Just t4
+  "t5" -> Just t5
+  "t6" -> Just t6
+  _ -> Nothing

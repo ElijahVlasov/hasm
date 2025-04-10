@@ -42,4 +42,3 @@ writeByte
    . (KnownNat n, KnownNat (n + 1), CmpNat n (n + 1) ~ 'LT)
   => Word32 -> InstructionChunk n (n + 1)
 writeByte = fromWord32
-

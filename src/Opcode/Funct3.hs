@@ -1,40 +1,40 @@
 module Opcode.Funct3
-    ( Funct3
-    , fromWord32
-    , toWord32
-    , addSub
-    , Opcode.Funct3.xor
-    , Opcode.Funct3.or
-    , Opcode.Funct3.and
-    , sll
-    , srl
-    , slt
-    , sltu
-    , lb
-    , lh
-    , lw
-    , lbu
-    , lhu
-    , sb
-    , sh
-    , sw
-    , beq
-    , bne
-    , blt
-    , bge
-    , bltu
-    , bgeu
-    , jalr
-    , priv
-    , fence
-    ) where
+  ( Funct3
+  , fromWord32
+  , toWord32
+  , addSub
+  , Opcode.Funct3.xor
+  , Opcode.Funct3.or
+  , Opcode.Funct3.and
+  , sll
+  , srl
+  , slt
+  , sltu
+  , lb
+  , lh
+  , lw
+  , lbu
+  , lhu
+  , sb
+  , sh
+  , sw
+  , beq
+  , bne
+  , blt
+  , bge
+  , bltu
+  , bgeu
+  , jalr
+  , priv
+  , fence
+  ) where
 
 import Data.Bits (shiftL, (.&.))
 import Data.Word (Word32)
 
 -- Funct3 module
 newtype Funct3 = Funct3 Word32
-    deriving newtype (Eq, Show)
+  deriving newtype (Eq, Show)
 
 funct3Mask :: Word32
 funct3Mask = 0b111
@@ -47,31 +47,31 @@ toWord32 (Funct3 x) = x
 
 -- Funct3 constants
 addSub
-    , xor
-    , or
-    , and
-    , sll
-    , srl
-    , slt
-    , sltu
-    , lb
-    , lh
-    , lw
-    , lbu
-    , lhu
-    , sb
-    , sh
-    , sw
-    , beq
-    , bne
-    , blt
-    , bge
-    , bltu
-    , bgeu
-    , jalr
-    , priv
-    , fence
-        :: Funct3
+  , xor
+  , or
+  , and
+  , sll
+  , srl
+  , slt
+  , sltu
+  , lb
+  , lh
+  , lw
+  , lbu
+  , lhu
+  , sb
+  , sh
+  , sw
+  , beq
+  , bne
+  , blt
+  , bge
+  , bltu
+  , bgeu
+  , jalr
+  , priv
+  , fence
+    :: Funct3
 addSub = fromWord32 0b000
 xor = fromWord32 0b100
 or = fromWord32 0b110
@@ -97,4 +97,3 @@ bgeu = fromWord32 0b111
 jalr = fromWord32 0b000
 priv = fromWord32 0b000
 fence = fromWord32 0b000
-

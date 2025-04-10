@@ -1,28 +1,28 @@
 {-# LANGUAGE DerivingStrategies #-}
 
 module Opcode
-    ( Opcode
-    , fromWord32
-    , toWord32
-    , arithRegImmOpcode
-    , arithRegRegOpcode
-    , luiOpcode
-    , auipcOpcode
-    , branchOpcode
-    , jalOpcode
-    , jalrOpcode
-    , systemOpcode
-    , loadOpcode
-    , storeOpcode
-    , fenceOpcode
-    ) where
+  ( Opcode
+  , fromWord32
+  , toWord32
+  , arithRegImmOpcode
+  , arithRegRegOpcode
+  , luiOpcode
+  , auipcOpcode
+  , branchOpcode
+  , jalOpcode
+  , jalrOpcode
+  , systemOpcode
+  , loadOpcode
+  , storeOpcode
+  , fenceOpcode
+  ) where
 
 import Data.Bits ((.&.))
 import Data.Word (Word32)
 
 -- Opcode module
 newtype Opcode = Opcode Word32
-    deriving newtype (Eq, Show)
+  deriving newtype (Eq, Show)
 
 opcodeMask :: Word32
 opcodeMask = 0b1111111
@@ -35,17 +35,17 @@ toWord32 (Opcode x) = x
 
 -- Opcode constants
 arithRegImmOpcode
-    , arithRegRegOpcode
-    , luiOpcode
-    , auipcOpcode
-    , branchOpcode
-    , jalOpcode
-    , jalrOpcode
-    , systemOpcode
-    , loadOpcode
-    , storeOpcode
-    , fenceOpcode
-        :: Opcode
+  , arithRegRegOpcode
+  , luiOpcode
+  , auipcOpcode
+  , branchOpcode
+  , jalOpcode
+  , jalrOpcode
+  , systemOpcode
+  , loadOpcode
+  , storeOpcode
+  , fenceOpcode
+    :: Opcode
 arithRegImmOpcode = fromWord32 0b0010011
 arithRegRegOpcode = fromWord32 0b0110011
 luiOpcode = fromWord32 0b0110111
