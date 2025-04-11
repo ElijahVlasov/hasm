@@ -52,7 +52,7 @@ extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
 common warnings
-    ghc-options: -Wall
+    ghc-options: -Wall -Wno-name-shadowing
 
 library
     -- Import common warning flags.
@@ -60,13 +60,15 @@ library
 
     -- Modules exported by the library.
     exposed-modules: 
+        FenceType,
+        Immediate,
+        Instruction,
+        Instruction.Raw,
+        InstructionBuilder,
+        InstructionBuilder.InstructionChunk,
         Opcode,
         Opcode.Funct3,
         Opcode.Funct7,
-        Immediate,
-        InstructionBuilder,
-        InstructionBuilder.InstructionChunk,
-        FenceType,
         Register,
         Utils
 

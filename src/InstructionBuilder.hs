@@ -99,7 +99,8 @@ funct7 = IChunk.fromWord32 . Funct7.toWord32
 
 imm
   :: (KnownNat n, KnownNat m, KnownNat (n + m), CmpNat n (n + m) ~ 'LT)
-  => Immediate m -> InstructionChunk n (n + m)
+  => Immediate m
+  -> InstructionChunk n (n + m)
 imm = IChunk.fromWord32 . Immediate.toWord32
 
 fence :: FenceType -> FenceType -> InstructionChunk 20 28
@@ -129,13 +130,7 @@ buildInstruction
         >:> rs1 itRs1
         >:> imm itImm
 buildInstruction
-  ( SType
-      stOpcode
-      stRs1
-      stRs2
-      stImm
-      stFunct3
-    ) =
+  (SType stOpcode stRs1 stRs2 stImm stFunct3) =
     let imm = Immediate.toWord32 stImm
     in  IChunk.toWord32
           $ opcode stOpcode
@@ -181,4 +176,3 @@ buildInstruction
         >:> rs1 Register.x0
         >:> fence ftPre ftSucc
         >:> IChunk.fromWord32 0
-
