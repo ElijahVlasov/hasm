@@ -201,7 +201,7 @@ bgeu :: Register -> Register -> Immediate 12 -> RawInstruction
 bgeu src1 src2 offset =
   RawInstruction . buildInstruction $ BType src1 src2 offset Funct3.bgeu
 
-jal :: Register -> Immediate 20 -> RawInstruction
+jal :: Register -> Immediate 21 -> RawInstruction
 jal dst imm = RawInstruction . buildInstruction $ JType Opcode.jalOpcode dst imm
 
 jalr :: Register -> Register -> Immediate 12 -> RawInstruction

@@ -64,7 +64,7 @@ data InstructionType
   | JType
       { jtOpcode :: Opcode
       , jtRd :: Register
-      , jtImm :: Immediate 20
+      , jtImm :: Immediate 21
       }
   | FType
       { ftOpcode :: Opcode
