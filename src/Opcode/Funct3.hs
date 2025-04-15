@@ -29,7 +29,7 @@ module Opcode.Funct3
   , fence
   ) where
 
-import Data.Bits (shiftL, (.&.))
+import Data.Bits ((.&.))
 import Data.Word (Word32)
 
 -- Funct3 module

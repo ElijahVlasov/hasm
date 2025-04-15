@@ -8,7 +8,7 @@ module Opcode.Funct7
   , subSra
   ) where
 
-import Data.Bits (shiftL, (.&.))
+import Data.Bits ((.&.))
 import Data.Word (Word32)
 
 -- Funct7 module
