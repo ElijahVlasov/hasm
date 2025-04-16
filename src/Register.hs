@@ -253,7 +253,7 @@ t5 = x30
 t6 = x31
 
 -- String to register conversion
-fromString :: Text -> Maybe Register
+fromString :: String -> Maybe Register
 fromString s = case s of
   "x0" -> Just x0
   "x1" -> Just x1

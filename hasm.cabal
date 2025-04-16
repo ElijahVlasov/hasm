@@ -63,12 +63,15 @@ library
         FenceType,
         Immediate,
         Instruction,
-        Instruction.Raw,
         InstructionBuilder,
         InstructionBuilder.InstructionChunk,
+        Instruction.Raw,
+        Lexer,
         Opcode,
         Opcode.Funct3,
         Opcode.Funct7,
+        Parser,
+        Parser.Error,
         Register,
         Utils
 
@@ -80,9 +83,13 @@ library
 
     -- Other library packages from which modules are imported.
     build-depends:    
+        array ^>= 0.5.4.0,
         base ^>=4.17.2.1,
         text ^>=2.0.2
-
+    build-tool-depends:
+        , alex:alex   >= 3.2.5
+            -- alex-3.2.5 contains fixes for building with GHC 8.8
+        , happy:happy >= 1.19.12
     -- Directories containing source files.
     hs-source-dirs:   src
 
