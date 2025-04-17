@@ -1,5 +1,5 @@
 {
-module Lexer where
+module Lexer (Token (..), lexer) where
 
 import Data.Int (Int32)
 import Data.Word (Word32)
@@ -83,4 +83,7 @@ data Token =
 
 data LexError = InvalidCharacter String
   deriving (Show)
+
+lexer :: String -> [Token]
+lexer = alexScanTokens
 }

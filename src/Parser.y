@@ -1,11 +1,11 @@
 {
 {-# LANGUAGE DataKinds #-}
-module Parser where
+module Parser (parseProgram, lexer) where
 
 import Immediate (Immediate (..))
 import Immediate qualified as Imm
 import Instruction (Instruction (..))
-import Lexer (Token (..))
+import Lexer (Token (..), lexer)
 import Parser.Error (ParsingError (..))
 import Register qualified 
 import Utils (okOrLeft)
