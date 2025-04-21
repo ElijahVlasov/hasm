@@ -3,7 +3,6 @@ module Test.Parser.SingleInstruction (testSingleInstruction) where
 import Test.Tasty (TestTree, testGroup)
 import Test.Tasty.HUnit (testCase, (@?=))
 
-import Immediate (Immediate)
 import Immediate qualified
 import Instruction (Instruction (..))
 import Parser (lexer, parseProgram)
@@ -11,7 +10,7 @@ import Parser.Error (ParsingError (..))
 import Register
 
 testSingleInstruction :: TestTree
-testSingleInstruction = 
+testSingleInstruction =
   testGroup
     "Test single instruction parsing"
     [ testEmptyProgram
@@ -54,15 +53,15 @@ testSingleInstruction =
     ]
 
 testEmptyProgram :: TestTree
-testEmptyProgram = 
+testEmptyProgram =
   testCase "empty program parsing"
-    $ parseProgram [] 
+    $ parseProgram []
       @?= Right []
 
 testAddImm :: TestTree
 testAddImm =
   testCase "add x2, x1, 5"
-    $ (parseProgram . lexer) "add x2, x1, 5"  
+    $ (parseProgram . lexer) "add x2, x1, 5"
       @?= Right [Add x2 x1 (Right $ Immediate.fromWord32 5)]
 
 testAddReg :: TestTree
@@ -71,14 +70,14 @@ testAddReg =
     $ (parseProgram . lexer) "add x2, x1, x3"
       @?= Right [Add x2 x1 (Left x3)]
 
-testWrongLexeme :: TestTree 
+testWrongLexeme :: TestTree
 testWrongLexeme =
   testCase "Wrong lexeme error message"
     $ (parseProgram . lexer) "add y3, x1, x2"
       @?= Left (InvalidRegister "y3")
 
 testInvalidSyntax :: TestTree
-testInvalidSyntax = 
+testInvalidSyntax =
   testCase "Invalid syntax error message"
     $ (parseProgram . lexer) "add x1, x2"
       @?= Left (DefaultError "Parse error")
@@ -274,5 +273,3 @@ testEbreak =
   testCase "ebreak"
     $ (parseProgram . lexer) "ebreak"
       @?= Right [Ebreak]
-
-

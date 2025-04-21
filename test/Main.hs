@@ -7,6 +7,7 @@ import Test.Tasty.Runners (TestTree (TestGroup))
 
 import Test.Immediate (testImmediate)
 import Test.Instruction.Raw (testRawInstruction)
+import Test.Parser (testParser)
 import Test.Parser.SingleInstruction (testSingleInstruction)
 
 main :: IO ()
@@ -17,6 +18,7 @@ tests =
   TestGroup
     "Tests"
     [ testImmediate
+    , testParser
     , testRawInstruction
     , testSingleInstruction
     ]
